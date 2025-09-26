@@ -4,7 +4,7 @@ export const RESUME_DATA: ResumeData = {
   name: "Eduardo Moreira",
   location: "São Paulo – SP",
   phone: "(11) 91955-2181",
-  email: "moreira.edu@gmail.com",
+  email: "edu@clubesa.com.br",
   linkedinUrl: "https://linkedin.com/in/edu-moreira-87867721",
   linkedinHandle: "linkedin.com/in/edu-moreira-87867721",
   summary: "Profissional sênior de Inteligência de Negócios e Estratégia, com mais de 20 anos de experiência em finanças, inovação e operações multissetoriais. Fundador e CEO do Clube do Empreendedor S.A, apoiando startups e empresas em modelagem de negócios, expansão e captação de recursos. Experiência como investidor, conselheiro e consultor em franquias de educação, com atuação direta na estruturação de franqueadoras, unidades modelo e implantação de sistemas de gestão.",
