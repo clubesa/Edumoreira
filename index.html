@@ -20,21 +20,420 @@
         },
       }
     </script>
+    <!-- Use UMD builds for React and ReactDOM for simplicity in a single-file setup -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <!-- Add Babel Standalone for in-browser JSX/TSX transpilation -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script type="importmap">
-{
-  "imports": {
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
-    "react": "https://aistudiocdn.com/react@^19.1.1",
-    "react/": "https://aistudiocdn.com/react@^19.1.1/"
-  }
-}
-</script>
 </head>
   <body class="bg-gray-100">
     <div id="root"></div>
-    <!-- Add data-presets to tell Babel how to transpile React (JSX) and TypeScript -->
-    <script type="text/babel" data-presets="react,typescript" src="./index.tsx"></script>
+    <!-- 
+      All application code is now consolidated into this single script block.
+      This removes all module import/export complexity and ensures the app
+      runs correctly on static hosting platforms like GitHub Pages.
+    -->
+    <script type="text/babel" data-presets="react,typescript">
+      
+// --- From constants.ts ---
+const RESUME_DATA = {
+  name: "Eduardo Moreira",
+  location: "São Paulo – SP",
+  phone: "(11) 91955-2181",
+  email: "edu@clubesa.com.br",
+  linkedinUrl: "https://linkedin.com/in/edu-moreira-87867721",
+  linkedinHandle: "linkedin.com/in/edu-moreira-87867721",
+  summary: "Profissional sênior de Inteligência de Negócios e Estratégia, com mais de 20 anos de experiência em finanças, inovação e operações multissetoriais. Fundador e CEO do Clube do Empreendedor S.A, apoiando startups e empresas em modelagem de negócios, expansão e captação de recursos. Experiência como investidor, conselheiro e consultor em franquias de educação, com atuação direta na estruturação de franqueadoras, unidades modelo e implantação de sistemas de gestão.",
+  passionStatement: "Apaixonado por traduzir dados em insights estratégicos, gerar crescimento sustentável e desenvolver modelos de negócios escaláveis.",
+  keyCompetencies: [
+    "Inteligência de Negócios e Análise de Dados",
+    "Estratégia empresarial e planejamento de expansão",
+    "Modelagem de negócios e captação de recursos",
+    "Estruturação e gestão de franquias (educação)",
+    "Gestão financeira, auditoria e investimentos",
+    "Inovação sistêmica, design estratégico e metodologias ágeis",
+    "Liderança, governança corporativa e desenvolvimento de equipes"
+  ],
+  experience: [
+    {
+        company: "LABirintar",
+        location: "São Paulo",
+        title: "Cofundador",
+        period: "Presente",
+        responsibilities: [
+            "Cofundador e responsável por estratégia, modelagem de negócios e desenvolvimento de iniciativas de inovação.",
+            "Coordenação de projetos de experimentação, pilotos e parcerias para testar modelos de operação.",
+            "Desenho de jornadas de cliente e propostas de valor para expansão multimarcas e canais digitais."
+        ]
+    },
+    {
+      company: "Clube do Empreendedor S.A",
+      location: "São Paulo",
+      title: "CEO e Fundador",
+      period: "2013 – Atual",
+      responsibilities: [
+        "Estruturação de modelos de negócios escaláveis e planos de viabilidade para startups e PMEs.",
+        "Condução de projetos de planejamento estratégico, design thinking e inovação sistêmica.",
+        "Apoio a empreendedores em captação de recursos, governança e gestão ágil."
+      ]
+    },
+    {
+      company: "Pedivela Tecnologia da Informação e Transportes Ltda",
+      location: "São Paulo",
+      title: "Sócio Investidor e Conselheiro",
+      period: "2013 – 2022",
+      responsibilities: [
+        "Responsável pela gestão financeira e operacional das empresas do grupo.",
+        "Atuação como conselheiro e consultor estratégico, apoiando decisões de expansão e eficiência."
+      ]
+    },
+    {
+      company: "Speak Fast Group",
+      location: "Vitória/ES",
+      title: "Administrador e Estruturador de Franquia",
+      period: "2013 – 2016",
+      responsibilities: [
+        "Estruturação da franqueadora e implantação da unidade operacional modelo.",
+        "Desenvolvimento do plano de expansão e venda de unidades franqueadas.",
+        "Implantação de sistemas de gestão para padronização e escalabilidade."
+      ]
+    },
+    {
+      company: "Oparque",
+      location: "Vitória/ES",
+      title: "Consultor de Gestão de Negócios",
+      period: "2016 – 2018",
+      responsibilities: [
+        "Estruturação de modelos de negócios e projetos de viabilidade.",
+        "Implantação de Balanced Scorecard e escritórios de projetos."
+      ]
+    },
+    {
+      company: "Bandes – Banco de Desenvolvimento do Espírito Santo S.A",
+      location: "",
+      title: "Consultor em Projetos de Investimento",
+      period: "2012 – 2018",
+      responsibilities: [
+        "Elaboração e análise de projetos de investimento para fomento econômico."
+      ]
+    },
+    {
+      company: "Sebrae",
+      location: "Vitória/ES",
+      title: "Analista Financeiro",
+      period: "2007 – 2013",
+      responsibilities: [
+        "Apoio a micro e pequenos empresários em gestão financeira e empreendedorismo."
+      ]
+    }
+  ],
+  previousExperience: "(Experiência anterior em indústrias e mineração como contador sênior e analista de custos.)",
+  education: [
+    {
+      degree: "Bacharelado em Ciências de Dados e Inteligência Artificial",
+      institution: "Universidade SENAI",
+      period: "2025 - Presente"
+    },
+    {
+      degree: "MBA em Finanças, Auditoria e Controladoria",
+      institution: "Fundação Getulio Vargas (FGV)",
+      period: "2004 – 2006"
+    },
+    {
+      degree: "Pós-graduação em Análise de Sistemas",
+      institution: "Centro Universitário São Camilo",
+      period: "2000 – 2002"
+    },
+    {
+      degree: "Bacharelado em Administração",
+      institution: "FACCACI",
+      period: "2000 – 2002"
+    },
+    {
+      degree: "Bacharelado em Ciências Contábeis",
+      institution: "FACCACI",
+      period: "1995 – 1999"
+    }
+  ],
+  differentiators: [
+    "Atuação prática na estruturação de franquias e expansão multimarcas.",
+    "Perfil empreendedor e inovador, com vivência tanto como executivo quanto investidor.",
+    "Experiência em conselhos e projetos de governança.",
+    "Capacidade de integrar visão estratégica, financeira e operacional para crescimento escalável."
+  ],
+  coverLetter: {
+    title: "Carta de Apresentação",
+    recipientName: "Pedro Drumond Jr.",
+    recipient: "Prezado Pedro,",
+    paragraphs: [
+      "Apresento-me com entusiasmo para a posição de Inteligência de negócios no grupo AM Foods. Minha trajetória une formação acadêmica sólida, experiência executiva e vivência empreendedora, fatores que me permitem contribuir de forma estratégica para a expansão e excelência operacional do grupo.",
+      "Sou Administrador e Contador, especializado em Finanças pela Fundação Getulio Vargas e em Sistemas de Informação, além de possuir certificação em Neurociências e Psicologia pelo IED. Atuei como contador e diretor de custos em grandes indústrias da mineração e do cimento, fui docente universitário em disciplinas de gestão, finanças e empreendedorismo, e trabalhei no SEBRAE como analista técnico, apoiando centenas de empreendedores na elaboração de planos de negócios, projetos de viabilidade e acesso a crédito.",
+      "Nos últimos anos, consolidei minha atuação como empreendedor serial e consultor de negócios. Fui CEO, COO, CFO e Conselheiro em startups, como no caso da Pedivela, onde participei desde a modelagem inicial até a captação de recursos e operação por sete anos. Fundador do Clube do Empreendedor S.A., apoiei mais de 150 empreendedores por meio do programa Empreendeção. Mais recentemente, como Cofundador da LABirintar, venho desenvolvendo iniciativas voltadas à inovação, modelagem de negócios e redes de empreendimentos.",
+      "Essa combinação de experiências me permite integrar visão estratégica, gestão financeira, inovação e eficiência operacional, com foco em crescimento sustentável e escalabilidade.",
+      "Estou motivado em colocar esse conjunto de competências à disposição do grupo, contribuindo para o fortalecimento da marca, a padronização de processos e a expansão competitiva no setor.",
+      "Agradeço a atenção e coloco-me à disposição para conversarmos sobre como posso agregar valor à equipe e aos objetivos estratégicos do grupo."
+    ],
+    closing: "Atenciosamente,",
+    signature: "Eduardo Moreira",
+    contacts: [
+      "📱 (11) 91955-2181",
+      "✉️ edu@clubesa.com.br",
+      "🔗 linkedin.com/in/edu-moreira-87867721"
+    ]
+  }
+};
+
+// --- From components/icons/index.tsx ---
+const LocationIcon = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+  </svg>
+);
+
+const PhoneIcon = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+  </svg>
+);
+
+const MailIcon = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+  </svg>
+);
+
+const LinkedInIcon = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" {...props}>
+    <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+  </svg>
+);
+
+const DocumentTextIcon = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+  </svg>
+);
+
+const XMarkIcon = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+  </svg>
+);
+
+// --- From components/Section.tsx ---
+const Section = ({ title, children }) => {
+  return (
+    <section className="mb-8">
+      <h2 className="text-2xl font-bold font-serif text-gray-700 border-b-2 border-teal-500 pb-2 mb-6">
+        {title}
+      </h2>
+      {children}
+    </section>
+  );
+};
+
+// --- From components/ExperienceItem.tsx ---
+const ExperienceItem = ({ experience }) => {
+  return (
+    <div className="flex flex-col">
+      <div className="flex justify-between items-baseline">
+        <h3 className="text-xl font-semibold text-gray-800">
+          {experience.company}
+          {experience.location && <span className="text-base font-normal text-gray-500 ml-2">{experience.location}</span>}
+        </h3>
+        <span className="text-sm font-medium text-gray-500 whitespace-nowrap">{experience.period}</span>
+      </div>
+      <p className="text-lg font-medium text-teal-700 mt-1">{experience.title}</p>
+      <ul className="mt-2 list-disc list-inside space-y-1 text-gray-700">
+        {experience.responsibilities.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+// --- From components/EducationItem.tsx ---
+const EducationItem = ({ education }) => {
+  return (
+    <div>
+      <h3 className="text-lg font-semibold text-gray-800">{education.degree}</h3>
+      <p className="text-md text-gray-600">{education.institution}</p>
+      <p className="text-sm text-gray-500">{education.period}</p>
+    </div>
+  );
+};
+
+// --- From components/Modal.tsx ---
+const Modal = ({ isOpen, onClose, title, children }) => {
+  const { useEffect } = React;
+
+  useEffect(() => {
+    const handleEsc = (event) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, [onClose]);
+
+  if (!isOpen) {
+    return null;
+  }
+
+  return (
+    <div
+      className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center p-4"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
+      <div
+        className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto font-serif"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <header className="sticky top-0 bg-white p-4 sm:p-6 border-b border-gray-200 flex justify-between items-center">
+          <h2 id="modal-title" className="text-xl font-bold text-gray-800 font-sans">
+            {title}
+          </h2>
+          <button
+            onClick={onClose}
+            className="text-gray-500 hover:text-gray-800 transition-colors"
+            aria-label="Fechar modal"
+          >
+            <XMarkIcon className="w-6 h-6" />
+          </button>
+        </header>
+        <div className="p-4 sm:p-6 text-gray-700 leading-relaxed">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// --- From App.tsx ---
+const App = () => {
+  const { useState } = React;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { coverLetter } = RESUME_DATA;
+
+  return (
+    <div className="font-sans text-gray-800 antialiased">
+      <main className="max-w-4xl mx-auto my-10 md:my-16 p-8 md:p-12 bg-white shadow-2xl rounded-lg">
+        <header className="text-center border-b-2 border-gray-100 pb-8 mb-8">
+          <h1 className="text-5xl font-bold font-serif text-gray-800 tracking-tight">
+            {RESUME_DATA.name}
+          </h1>
+          <div className="mt-4 flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-gray-600">
+            <a href="#" className="flex items-center gap-2 hover:text-teal-600 transition-colors">
+              <LocationIcon className="w-4 h-4" />
+              <span>{RESUME_DATA.location}</span>
+            </a>
+            <a href={`tel:${RESUME_DATA.phone.replace(/\\D/g, '')}`} className="flex items-center gap-2 hover:text-teal-600 transition-colors">
+              <PhoneIcon className="w-4 h-4" />
+              <span>{RESUME_DATA.phone}</span>
+            </a>
+            <a href={`mailto:${RESUME_DATA.email}`} className="flex items-center gap-2 hover:text-teal-600 transition-colors">
+              <MailIcon className="w-4 h-4" />
+              <span>{RESUME_DATA.email}</span>
+            </a>
+            <a href={RESUME_DATA.linkedinUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-teal-600 transition-colors">
+              <LinkedInIcon className="w-4 h-4" />
+              <span>{RESUME_DATA.linkedinHandle}</span>
+            </a>
+          </div>
+           <div className="mt-8 flex justify-center">
+             <button
+                onClick={() => setIsModalOpen(true)}
+                className="inline-flex items-center gap-2 px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition-colors"
+             >
+                <DocumentTextIcon className="w-5 h-5" />
+                <span>Carta para {coverLetter.recipientName}</span>
+            </button>
+           </div>
+        </header>
+
+        <Section title="Resumo Executivo">
+          <p className="text-gray-700 leading-relaxed">
+            {RESUME_DATA.summary}
+          </p>
+          <p className="mt-4 text-gray-700 italic">
+            {RESUME_DATA.passionStatement}
+          </p>
+        </Section>
+
+        <Section title="Competências-Chave">
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-gray-700">
+            {RESUME_DATA.keyCompetencies.map((skill, index) => (
+              <li key={index} className="flex items-start">
+                <span className="text-teal-500 font-bold mr-2">›</span> {skill}
+              </li>
+            ))}
+          </ul>
+        </Section>
+        
+        <Section title="Experiência Profissional">
+          <div className="space-y-8">
+            {RESUME_DATA.experience.map((job, index) => (
+              <ExperienceItem key={index} experience={job} />
+            ))}
+             <p className="text-sm text-gray-600 italic mt-6">{RESUME_DATA.previousExperience}</p>
+          </div>
+        </Section>
+
+        <Section title="Formação Acadêmica">
+           <div className="space-y-4">
+            {RESUME_DATA.education.map((edu, index) => (
+              <EducationItem key={index} education={edu} />
+            ))}
+          </div>
+        </Section>
+
+        <Section title="Diferenciais">
+           <ul className="list-disc list-inside space-y-2 text-gray-700">
+            {RESUME_DATA.differentiators.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+        </Section>
+      </main>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title={coverLetter.title}>
+         <div className="space-y-4">
+            <p>{coverLetter.recipient}</p>
+            {coverLetter.paragraphs.map((p, index) => <p key={index}>{p}</p>)}
+            <p>{coverLetter.closing}</p>
+            <p className="font-semibold">{coverLetter.signature}</p>
+            <div className="text-sm text-gray-600 border-t pt-4 mt-4">
+                {coverLetter.contacts.map((contact, index) => <p key={index}>{contact}</p>)}
+            </div>
+        </div>
+      </Modal>
+
+    </div>
+  );
+};
+
+
+// --- From index.tsx ---
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  throw new Error("Could not find root element to mount to");
+}
+
+const root = ReactDOM.createRoot(rootElement);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+    </script>
   </body>
 </html>
